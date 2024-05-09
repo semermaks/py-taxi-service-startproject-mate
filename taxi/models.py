@@ -27,12 +27,8 @@ class Driver(AbstractUser):
 
 class Car(models.Model):
     model = models.CharField(max_length=63)
-    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE)
-    drivers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='cars')
-
-    def manufacturer_name(self):
-        return self.manufacturer.name
-    manufacturer_name.short_description = 'Brand'
+    manufacturer = models.ForeignKey(Manufacturer, on_delete=models.CASCADE, related_name='car_manufacturers')
+    drivers = models.ManyToManyField(settings.AUTH_USER_MODEL, related_name='cars_driver')
 
     class Meta:
         ordering = ("manufacturer", )
